@@ -8,6 +8,7 @@ class Square:
 	dim = (0,0)
 	height = 0
 	visible = True
+
 	
 	def __init__(self, x, y, label, w, h, color, font):
 		self.position = (x,y)
@@ -15,7 +16,23 @@ class Square:
 		self.color = color
 		self.font = font
 		self.label = label
-	
+		self.victory = (x,y)
+	def inner(self,pos):
+		(i,j) = self.position
+		(w,h) = self.dim
+		(x1,y1) = (i*w,j*h)
+		(x2,y2) = ((i+1)*w, (j+1)*h)
+		(mx, my) = pos
+		if mx >= x1 and mx <= x2 and my >= y1 and my <= y2:
+			return True
+		else:
+			return False
+	def end_position(self):
+		if self.victory == self.position:
+			return True
+		else:
+			return False
+
 	def check_proximity(self, xy):
 		''' take a x/y position (as a tuple) and see if it is next to the current position '''
 		if self.position == (-1,-1): return False
